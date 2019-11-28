@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Matey</title>
+    <link rel="stylesheet" href="https://zwzn.github.io/character-sheet/main.css">
+</head>
+
+<body>
+    <div id="character"></div>
+
+    <script type="module">
+        import { Character } from 'https://zwzn.github.io/character-sheet/index.js'
+        const char = new Character()
+
+        char.name = 'Matey'
+        char.playerName = 'Sam Bibby'
+
+        char.setStats({
+            str: 14,
+            dex: 14,
+            con: 15,
+            int: 8,
+            wis: 10,
+            cha: 10,
+        })
+
+        char.setRace('Orc', c => {
+            c.stats.str.add(2)
+            c.stats.con.add(1)
+            c.stats.int.add(-2)
+
+            c.addSkillProficiency('intimidation')
+
+            c.speed = 30
+        })
+
+        char.setBackground('Pirate', c => {
+            c.addSkillProficiency('athletics')
+            c.addSkillProficiency('perception')
+        })
+
+        char.levelUp('Barbarian', c => {
+            c.addLimitedFeature('Rage', 2, 'lr')
+
+            c.setAC(10 + c.stats.con.mod() + c.stats.dex.mod())
+        })
+
+        char.levelUp('Barbarian', c => {
+        })
+
+        char.levelUp('Barbarian', c => {
+        })
+
+        char.addItem('Maul', c => {
+            c.addAttack({
+                name: 'Maul',
+                damage: () => `2d6 + ${c.stats.str.mod()}`,
+                type: 'attack',
+                attackBonus: () => c.stats.str.mod() + c.proficiencyBonus,
+            })
+        })
+
+        char.render().then(html => {
+            document.getElementById('character').innerHTML = html
+        })
+
+    </script>
+</body>
+
+</html>
