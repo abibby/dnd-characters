@@ -43,16 +43,45 @@
             c.addSkillProficiency('perception')
         })
 
-        char.levelUp('Barbarian', c => {
+        char.levelUp('Barbarian', c => { // 1
             c.addLimitedFeature('Rage', 2, 'lr')
 
+            c.addSaveProficiency('str')
+            c.addSaveProficiency('con')
+
+            c.addSkillProficiency('animal handling')
+            c.addSkillProficiency('athletics')
+            c.addSkillProficiency('intimidation')
+            c.addSkillProficiency('nature')
+            c.addSkillProficiency('perception')
+            c.addSkillProficiency('survival')
+
             c.setAC(10 + c.stats.con.mod() + c.stats.dex.mod())
+            c.addFeature('Unarmored Defense')
         })
 
-        char.levelUp('Barbarian', c => {
+        char.levelUp('Barbarian', c => { // 2
+            c.addFeature('Danger Sense')
+            c.addFeature('Reckless Attack')
         })
 
-        char.levelUp('Barbarian', c => {
+        char.levelUp('Barbarian', c => { // 3
+            c.addSubclass('Barbarian', 'Path of the Storm Herald')
+            c.addFeature('Storm Aura')
+        })
+
+        char.levelUp('Barbarian', c => { // 4
+            c.addFeat('Great Weapon Master', c => { })
+        })
+
+        char.levelUp('Barbarian', c => { // 5
+            c.addFeature('Extra Attack')
+
+            c.speed += 10
+        })
+
+        char.levelUp('Barbarian', c => { // 6
+            c.addFeature('Storm Soul')
         })
 
         char.addItem('Maul', c => {
@@ -63,6 +92,25 @@
                 attackBonus: () => c.stats.str.mod() + c.proficiencyBonus,
             })
         })
+        char.addItem('2 Handaxes', c => {
+            c.addAttack({
+                name: 'Handaxe',
+                range: '20/60',
+                damage: () => `1d6 + ${c.stats.str.mod()}`,
+                type: 'attack',
+                attackBonus: () => c.stats.str.mod() + c.proficiencyBonus,
+            })
+        })
+        char.addItem('A belaying pin (club)')
+        char.addItem('silk rope (50 feet)')
+        char.addItem('A lucky charm')
+        char.addItem('Backpack')
+        char.addItem('Bedroll')
+        char.addItem('Mess kit')
+        char.addItem('Tinderbox')
+        char.addItem('10 torches')
+        char.addItem('10 days of rations')
+        char.addItem('Waterskin')
 
         char.render().then(html => {
             document.getElementById('character').innerHTML = html
