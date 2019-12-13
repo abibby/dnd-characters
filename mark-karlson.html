@@ -32,12 +32,15 @@
             c.stats.str.add(1)
             c.stats.wis.add(2)
 
-            c.addLimitedFeature('Detect Magic', 1, 'lr')
-            c.addLimitedFeature('Disguise Self', 1, 'lr')
-            c.addSpell('Detect Magic')
-            c.addSpell('Disguise Self')
+            c.addLimitedFeature('Detect Magic', 1, 'sr')
+            c.addLimitedFeature('Disguise Self', 1, 'sr')
+            // c.addSpell('Detect Magic')
+            // c.addSpell('Disguise Self')
 
             c.addLimitedFeature('Hidden Step', 1, 'sr')
+
+            c.addFeature('Powerful Build')
+            c.addFeature('Speech of Beast and Leaf')
 
             c.speed = 30
         })
@@ -199,15 +202,16 @@ aura as well `)
         // char.addSpell('Contagion')
 
         // Level 6
-        char.addSpell('Harm')
+        // char.addSpell('Harm')
         char.addSpell('Planar Ally')
 
         // level 7
         char.addSpell('Regenerate')
         // char.addSpell('Conjure Celestial')
+        char.addSpell('Etherealness')
 
         char.assert(
-            c => c.level.get('Cleric') + c.stats.wis.mod() + 5 /* cantrips */ + 2/* firbolg */ + 10 /* cleric */,
+            c => c.level.get('Cleric') + c.stats.wis.mod() + 5 /* cantrips */ + 10 /* cleric */,
             c => c.spells.length,
             'Number of spells',
         )
