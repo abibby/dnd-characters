@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shillelagh</title>
+    <link rel="stylesheet" href="https://zwzn.github.io/character-sheet/main.css">
+</head>
+
+<body>
+    <div id="character"></div>
+
+    <script type="module">
+        import { Character } from 'https://zwzn.github.io/character-sheet/index.js'
+        const char = new Character()
+
+        char.name = 'Shillelagh'
+        char.playerName = 'Adam Bibby'
+
+        char.setStats({
+            str: 10,
+            dex: 12,
+            con: 15,
+            int: 9,
+            wis: 15,
+            cha: 10,
+        })
+
+        char.setRace('Human (Variant)', c => {
+            c.stats.wis.add(1)
+            c.stats.con.add(1)
+
+            c.addFeat('Magic Initiate', c => {
+                c.addSpell('Shillelagh')
+                c.addSpell('Magic Stone')
+                c.addSpell('Entangle')
+            })
+
+            c.speed = 30
+        })
+
+        char.levelUp('Ranger', c => { // 1
+
+        })
+
+        char.assert(
+            c => 27,
+            c => c.pointBuy(),
+            'invalid point buy',
+        )
+
+        char.render().then(html => {
+            document.getElementById('character').innerHTML = html
+        })
+
+    </script>
+</body>
+
+</html>

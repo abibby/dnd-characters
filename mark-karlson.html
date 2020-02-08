@@ -113,6 +113,11 @@
         })
         char.levelUp('Cleric', c => { // 13
         })
+        char.levelUp('Cleric', c => { // 14
+            c.addFeature('Destroy Undead (CR 3)')
+        })
+        char.levelUp('Cleric', c => { // 15
+        })
 
         char.addItem('Shining Plate Armor', c => {
             c.setAC(18 + 1)
@@ -144,10 +149,10 @@
         })
         char.addItem('Holy Symbol', c => { })
 
-        char.addFeature('Tattoo: Hammer and Sickle', `you emit an aura within five feet
-of you and anybody in this aura can use anybody else's saving throw modifier in
-place of their own when they have to make a save, so long as they are within the
-aura as well `)
+        char.addFeature('Tattoo: Hammer and Sickle', `you emit an aura within
+five feet of you and anybody in this aura can use anybody else's saving throw
+modifier in place of their own when they have to make a save, so long as they
+are within the aura as well `)
 
         // Cantrips
         char.addSpell('Guidance')
@@ -204,11 +209,15 @@ aura as well `)
         // Level 6
         // char.addSpell('Harm')
         char.addSpell('Planar Ally')
+        char.addSpell('True Seeing')
 
         // level 7
         char.addSpell('Regenerate')
         // char.addSpell('Conjure Celestial')
         char.addSpell('Etherealness')
+
+        // level 8
+        char.addSpell('Antimagic Field')
 
         char.assert(
             c => c.level.get('Cleric') + c.stats.wis.mod() + 5 /* cantrips */ + 10 /* cleric */,
