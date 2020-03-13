@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jake the Drake</title>
+    <link rel="stylesheet" href="https://zwzn.github.io/character-sheet/main.css">
+</head>
+
+<body>
+    <div id="character"></div>
+
+    <script type="module">
+        import { Character } from 'https://zwzn.github.io/character-sheet/index.js'
+        const char = new Character()
+
+        char.name = 'Jake the Drake'
+        char.playerName = 'Adam Bibby'
+
+        char.setStats({
+            str: 14,
+            dex: 12,
+            con: 15,
+            int: 8,
+            wis: 8,
+            cha: 14,
+        })
+
+        char.setRace('Goliath', c => {
+            c.stats.str.add(2)
+            c.stats.con.add(1)
+
+            c.addLimitedFeature('Stone\'s Endurance', 1, 'lr')
+            c.addFeature('Powerful Build')
+            c.addSkillProficiency('athletics')
+
+            c.speed = 30
+        })
+
+        char.levelUp('Barbarian', c => { // 1 - barbarian 1
+            c.addLimitedFeature('Rage', 2, 'lr')
+
+            c.addSaveProficiency('str')
+            c.addSaveProficiency('con')
+
+            c.addSkillProficiency('intimidation')
+            c.addSkillProficiency('perception')
+
+            c.setAC(10 + c.stats.con.mod() + c.stats.dex.mod())
+            c.addFeature('Unarmored Defense')
+        })
+
+        char.levelUp('Barbarian', c => { // 2 - barbarian 2
+            c.addFeature('Danger Sense')
+            c.addFeature('Reckless Attack')
+        })
+
+        char.levelUp('Barbarian', c => { // 3 - barbarian 3
+            c.addSubclass('Barbarian', 'Path of the Totem Warrior')
+            c.addFeature('Totem Spirit')
+        })
+
+        char.levelUp('Barbarian', c => { // 4 - barbarian 4
+            c.addFeat('Tavern Brawler', c => { })
+        })
+
+        char.levelUp('Barbarian', c => { // 5 - barbarian 5
+            c.addFeature('Extra Attack')
+
+            c.speed += 10
+        })
+
+        char.levelUp('Barbarian', c => { // 6 - barbarian 6\
+            c.addFeature('Aspect of the Beast')
+        })
+
+        char.levelUp('Bard', c => { // 7 - bard 1
+            c.addLimitedFeature('Bardic Inspiration', c.stats.cha.mod(), 'lr')
+
+            c.addSkillProficiency('persuasion')
+        })
+
+        char.levelUp('Bard', c => { // 8 - bard 2
+            c.addFeature('Jack of All Trades')
+            c.addFeature('Song of Rest (d6)')
+        })
+
+        char.levelUp('Bard', c => { // 9 - bard 3
+            c.addFeature('Expertise')
+            c.addSkillProficiency('athletics')
+            c.addSkillProficiency('intimidation')
+
+            c.addSubclass('College of Lore')
+
+            c.addFeature('Cutting Words')
+
+            c.addSkillProficiency('acrobatics')
+            c.addSkillProficiency('deception')
+            c.addSkillProficiency('performance')
+        })
+
+        char.levelUp('Bard', c => { // 10 - bard 4
+            c.addFeat('Grappler', c => { })
+        })
+
+
+        char.addItem('Bag of Folding Chairs')
+        char.addItem('Folding Chair', c => {
+            c.addAttack({
+                name: 'Folding Chair',
+                damage: () => `1d6 + ${c.stats.str.mod()}`,
+                type: 'attack',
+                attackBonus: () => c.stats.str.mod() + c.proficiencyBonus
+            })
+        })
+
+        char.addAttack({
+            name: 'Fist',
+            damage: () => `1d4 + ${char.stats.str.mod()}`,
+            type: 'attack',
+            attackBonus: () => char.stats.str.mod() + char.proficiencyBonus
+        })
+
+        char.addSpell('')
+
+        char.assert(
+            c => 27,
+            c => c.pointBuy(),
+            'invalid point buy',
+        )
+
+        char.addSpell('Vicious Mockery')
+        char.addSpell('True Strike')
+        char.addSpell('Thunderclap')
+
+        // level 1
+        char.addSpell('Cure Wounds')
+        char.addSpell('Healing Word')
+        char.addSpell('Longstrider')
+        char.addSpell('Unseen Servant')
+        // Disguise Self
+        // healig 
+
+        // Level 2
+        char.addSpell('Enhance Ability')
+        char.addSpell('Magic Mouth')
+
+        char.assert(
+            c => [0, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 44, 4, 4, 4, 4, 4, 4, 4,][char.level.get('Bard')] // cantrips
+                + [0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 15, 16, 18, 19, 19, 20, 22, 22, 22][char.level.get('Bard')], //leveled
+            c => c.spells.length,
+            'invalid spell count',
+        )
+
+        char.render().then(html => {
+            document.getElementById('character').innerHTML = html
+        })
+
+    </script>
+</body>
+
+</html>
