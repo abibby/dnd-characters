@@ -6,41 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mark</title>
-    <link rel="stylesheet" href="https://zwzn.github.io/character-sheet/main.css">
+    <link rel="stylesheet" href="https://abibby.github.io/character-sheet/main.css">
 </head>
 
 <body>
     <div id="character"></div>
 
     <script type="module">
-        import { Character } from 'https://zwzn.github.io/character-sheet/index.js'
+        import { Character } from 'https://abibby.github.io/character-sheet/index.js'
         const char = new Character()
 
         char.name = 'Mark Karlson'
         char.playerName = 'Adam Bibby'
 
         char.setStats({
-            str: 11,
-            dex: 10,
-            con: 15,
-            int: 12,
+            str: 13,
+            dex: 9,
+            con: 13,
+            int: 8,
             wis: 15,
-            cha: 8,
+            cha: 14,
         })
 
-        char.setRace('Firbolg', c => {
-            c.stats.str.add(1)
+        // char.setRace('Firbolg', c => {
+        //     c.stats.str.add(1)
+        //     c.stats.wis.add(2)
+
+        //     c.addLimitedFeature('Detect Magic', 1, 'sr')
+        //     c.addLimitedFeature('Disguise Self', 1, 'sr')
+        //     // c.addSpell('Detect Magic')
+        //     // c.addSpell('Disguise Self')
+
+        //     c.addLimitedFeature('Hidden Step', 1, 'sr')
+
+        //     c.addFeature('Powerful Build')
+        //     c.addFeature('Speech of Beast and Leaf')
+
+        //     c.speed = 30
+        // })
+
+        char.setRace('Aasimar (Protector)', c => {
+            c.stats.cha.add(1)
             c.stats.wis.add(2)
 
-            c.addLimitedFeature('Detect Magic', 1, 'sr')
-            c.addLimitedFeature('Disguise Self', 1, 'sr')
-            // c.addSpell('Detect Magic')
-            // c.addSpell('Disguise Self')
+            /**
+             * As an action, you can touch a creature and cause it to regain a
+             * number of hit points equal to your level. Once you use this
+             * trait, you can't use it again until you finish a long rest
+             */
+            c.addLimitedFeature('Healing Hands', 1, 'lr')
 
-            c.addLimitedFeature('Hidden Step', 1, 'sr')
+            /**
+             * Starting at 3rd level, you can use your action to unleash the
+             * divine energy within yourself, causing your eyes to glimmer and
+             * two luminous, incorporeal wings to sprout from your back. Your
+             * transformation lasts for 1 minute or until you end it as a bonus
+             * action. During it, you have a flying speed of 30 feet, and once
+             * on each of your turns, you can deal extra radiant damage to one
+             * target when you deal damage to it with an attack or a spell. The
+             * extra radiant damage equals your level.
+             *
+             * Once you use this trait, you can't use it again until you finish
+             * a long rest.
+             */
+            c.addLimitedFeature('Radiant Soul', 1, 'lr')
 
-            c.addFeature('Powerful Build')
-            c.addFeature('Speech of Beast and Leaf')
+            c.addFeature('Darkvision')
+
+            // You have resistance to necrotic damage and radiant damage.
+            c.addFeature('Celestial Resistance')
 
             c.speed = 30
         })
@@ -132,7 +166,7 @@
         // char.addItem('Shied', c => {
         //     c.addAC(2)
         // })
-        char.addItem('Tower Shied', c => {
+        char.addItem('Tower Shied, Purple', c => {
             c.addAC(4)
         })
 
@@ -154,8 +188,11 @@
             })
         })
         char.addItem('Holy Symbol', c => { })
+        char.addItem('Sunburst Pendant, 100gp', c => { })
 
         char.addItem('Eye of the Tiger', c => {
+            // Cast a spell at 5th level using the lowest level the spell it can
+            // be cast.
             c.addLimitedFeature('Eye of the Tiger', 2, 'lr')
         })
 
@@ -207,6 +244,7 @@ are within the aura as well `)
         char.addSpell('Control Water')
         char.addSpell('Stone Shape')
         char.addSpell('Freedom of Movement')
+        // char.addSpell('Banishment')
 
         // Level 5
         char.addSpell('Dawn')
@@ -240,6 +278,12 @@ are within the aura as well `)
             c => new Set(c.spells).size,
             c => c.spells.length,
             'No duplicate spells',
+        )
+
+        char.assert(
+            c => 27,
+            c => c.pointBuy(),
+            'invalid point buy',
         )
 
         char.render().then(html => {
