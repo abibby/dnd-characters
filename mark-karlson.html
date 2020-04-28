@@ -17,7 +17,7 @@
         const char = new Character()
 
         char.name = 'Mark Karlson'
-        char.playerName = 'Adam Bibby'
+        char.playerName = 'Adam Bibby - 1521-11'
 
         char.setStats({
             str: 13,
@@ -28,33 +28,19 @@
             cha: 14,
         })
 
-        // char.setRace('Firbolg', c => {
-        //     c.stats.str.add(1)
-        //     c.stats.wis.add(2)
-
-        //     c.addLimitedFeature('Detect Magic', 1, 'sr')
-        //     c.addLimitedFeature('Disguise Self', 1, 'sr')
-        //     // c.addSpell('Detect Magic')
-        //     // c.addSpell('Disguise Self')
-
-        //     c.addLimitedFeature('Hidden Step', 1, 'sr')
-
-        //     c.addFeature('Powerful Build')
-        //     c.addFeature('Speech of Beast and Leaf')
-
-        //     c.speed = 30
-        // })
-
-        char.setRace('Aasimar (Protector)', c => {
-            c.stats.cha.add(1)
+        char.setRace('Firbolg (Aasimar)', c => {
+            c.stats.str.add(1)
             c.stats.wis.add(2)
 
-            /**
-             * As an action, you can touch a creature and cause it to regain a
-             * number of hit points equal to your level. Once you use this
-             * trait, you can't use it again until you finish a long rest
-             */
-            c.addLimitedFeature('Healing Hands', 1, 'lr')
+            c.addLimitedFeature('Detect Magic', 1, 'sr')
+            c.addLimitedFeature('Disguise Self', 1, 'sr')
+            // c.addSpell('Detect Magic')
+            // c.addSpell('Disguise Self')
+
+            c.addLimitedFeature('Hidden Step', 1, 'sr')
+
+            c.addFeature('Powerful Build')
+            c.addFeature('Speech of Beast and Leaf')
 
             /**
              * Starting at 3rd level, you can use your action to unleash the
@@ -70,11 +56,6 @@
              * a long rest.
              */
             c.addLimitedFeature('Radiant Soul', 1, 'lr')
-
-            c.addFeature('Darkvision')
-
-            // You have resistance to necrotic damage and radiant damage.
-            c.addFeature('Celestial Resistance')
 
             c.speed = 30
         })
@@ -169,24 +150,25 @@
         char.addItem('Tower Shied, Purple', c => {
             c.addAC(4)
         })
+        char.addItem('Cloak', c => { })
 
-        char.addItem('Light Hammer', c => {
-            c.addAttack({
-                name: 'Light Hammer',
-                damage: () => `1d4 + ${c.stats.str.mod()}`,
-                type: 'attack',
-                attackBonus: () => c.stats.str.mod() + c.proficiencyBonus,
-                range: '20/60',
-            })
-        })
-        char.addItem('Sickle', c => {
-            c.addAttack({
-                name: 'Sickle',
-                damage: () => `1d4 + ${c.stats.str.mod()}`,
-                type: 'attack',
-                attackBonus: () => c.stats.str.mod() + c.proficiencyBonus
-            })
-        })
+        // char.addItem('Light Hammer', c => {
+        //     c.addAttack({
+        //         name: 'Light Hammer',
+        //         damage: () => `1d4 + ${c.stats.str.mod()}`,
+        //         type: 'attack',
+        //         attackBonus: () => c.stats.str.mod() + c.proficiencyBonus,
+        //         range: '20/60',
+        //     })
+        // })
+        // char.addItem('Sickle', c => {
+        //     c.addAttack({
+        //         name: 'Sickle',
+        //         damage: () => `1d4 + ${c.stats.str.mod()}`,
+        //         type: 'attack',
+        //         attackBonus: () => c.stats.str.mod() + c.proficiencyBonus
+        //     })
+        // })
         char.addItem('Holy Symbol', c => { })
         char.addItem('Sunburst Pendant, 100gp', c => { })
 
@@ -257,7 +239,7 @@ are within the aura as well `)
         char.addSpell('Planar Ally')
         char.addSpell('True Seeing')
         char.addSpell('Word of Recall')
-        char.addSpell('Hero\'s Feast')
+        char.addSpell('Heroes\' Feast')
 
         // level 7
         char.addSpell('Regenerate')
