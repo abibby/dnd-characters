@@ -136,6 +136,10 @@
         char.levelUp('Cleric', c => { // 16
             c.stats.con.add(2)
         })
+        char.levelUp('Cleric', c => { // 16
+            c.addFeature('Destroy Undead (CR 4)')
+            c.addFeature('Supreme Healing')
+        })
 
         char.addItem('Shining Plate Armor', c => {
             c.setAC(18 + 1)
@@ -171,6 +175,7 @@
         // })
         char.addItem('Holy Symbol', c => { })
         char.addItem('Sunburst Pendant, 100gp', c => { })
+        // char.addItem('Reliquary, 1,000gp with religious text', c => { })
 
         char.addItem('Eye of the Tiger', c => {
             // Cast a spell at 5th level using the lowest level the spell it can
@@ -248,7 +253,12 @@ are within the aura as well `)
         char.addSpell('Temple of the Gods')
 
         // level 8
-        char.addSpell('Antimagic Field')
+        // char.addSpell('Antimagic Field')
+        char.addSpell('Holy Aura')
+        // char.addSpell('Control Weather')
+
+        // level 9
+        char.addSpell('Mass Heal')
 
         char.assert(
             c => c.level.get('Cleric') + c.stats.wis.mod() + 5 /* cantrips */ + 10 /* cleric */,
