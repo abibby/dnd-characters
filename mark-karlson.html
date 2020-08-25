@@ -136,9 +136,12 @@
         char.levelUp('Cleric', c => { // 16
             c.stats.con.add(2)
         })
-        char.levelUp('Cleric', c => { // 16
+        char.levelUp('Cleric', c => { // 17
             c.addFeature('Destroy Undead (CR 4)')
             c.addFeature('Supreme Healing')
+        })
+        char.levelUp('Cleric', c => { // 18
+            c.updateLimitedFeature('Channel Divinity: Preserve Life', { uses: 3 })
         })
 
         char.addItem('Shining Plate Armor', c => {
@@ -218,11 +221,11 @@ are within the aura as well `)
         // char.addSpell('Shield of Faith')
 
         // Level 2
-        char.addSpell('Blindness/Deafness')
+        // char.addSpell('Blindness/Deafness')
         char.addSpell('Silence')
         char.addSpell('Zone of Truth')
         char.addSpell('Hold Person')
-        // char.addSpell('Calm Emotions')
+        char.addSpell('Calm Emotions')
         // char.addSpell('Prayer of Healing')
 
         // Level 3
