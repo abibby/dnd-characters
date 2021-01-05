@@ -161,6 +161,10 @@
         // 18
         c.updateLimitedFeature("Channel Divinity: Preserve Life", { uses: 3 });
       });
+      char.levelUp("Cleric", (c) => {
+        // 19
+        c.stats.con.add(2);
+      });
 
       char.addItem("Shining Plate Armor", (c) => {
         c.setAC(18 + 1);
@@ -175,7 +179,7 @@
       // char.addItem("Tower Shied, Purple", (c) => {
       //   c.addAC(4);
       // });
-      char.addItem("Tower Shied, Droysium", (c) => {
+      char.addItem("Tower Shield, Droysium", (c) => {
         c.addAC(4 + 1);
       });
       char.addItem("Cloak", (c) => {});
@@ -201,10 +205,15 @@
       char.addItem("Sunburst Pendant, 100gp", (c) => {});
       // char.addItem('Reliquary, 1,000gp with religious text', c => { })
 
-      char.addItem("Eye of the Tiger", (c) => {
-        // Cast a spell at 5th level using the lowest level the spell it can
-        // be cast.
-        c.addLimitedFeature("Eye of the Tiger", 2, "lr");
+      // char.addItem("Eye of the Tiger", (c) => {
+      //   // Cast a spell at 5th level using the lowest level the spell it can
+      //   // be cast.
+      //   c.addLimitedFeature("Eye of the Tiger", 2, "lr");
+      // });
+
+      char.addItem("Faith's Ju Ju", (c) => {
+        c.stats.int.set(18)
+        // c.spellSaveDC += 1
       });
 
       char.addFeature(
