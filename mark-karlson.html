@@ -57,7 +57,7 @@
          * Once you use this trait, you can't use it again until you finish
          * a long rest.
          */
-        c.addLimitedFeature("Radiant Soul", 1, "lr");
+        c.addLimitedFeature("Radiant Soul (1h)", 1, "lr");
 
         c.speed = 30;
       });
@@ -163,7 +163,9 @@
       });
       char.levelUp("Cleric", (c) => {
         // 19
-        c.stats.con.add(2);
+        c.addFeat("Telekinetic", (c) => {
+          c.stats.wis.add(1);
+        });
       });
 
       char.addItem("Shining Plate Armor", (c) => {
@@ -213,6 +215,7 @@
 
       char.addItem("Faith's Ju Ju", (c) => {
         c.stats.int.set(18)
+        // c.addAC(2 + 2);
         // c.spellSaveDC += 1
       });
 
