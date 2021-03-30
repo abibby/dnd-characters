@@ -164,7 +164,8 @@
       char.levelUp("Cleric", (c) => {
         // 19
         c.addFeat("Telekinetic", (c) => {
-          c.stats.wis.add(1);
+          c.addSpell("Mage Hand");
+          // c.stats.wis.add(1);
         });
       });
 
@@ -326,6 +327,7 @@ are within the aura as well `
         (c) =>
           c.level.get("Cleric") +
           c.stats.wis.mod() +
+          1 /* Telekinetic */ +
           5 /* cantrips */ +
           10 /* cleric */,
         (c) => c.spells.length,
