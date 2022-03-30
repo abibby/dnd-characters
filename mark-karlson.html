@@ -168,6 +168,10 @@
           // c.stats.wis.add(1);
         });
       });
+      char.levelUp("Cleric", (c) => {
+        // 20
+        c.updateLimitedFeature("Divine Intervention Improvement");
+      });
 
       char.addItem("Shining Plate Armor", (c) => {
         c.setAC(18 + 1);
@@ -215,9 +219,9 @@
       // });
 
       char.addItem("Faith's Ju Ju", (c) => {
-        c.stats.int.set(18)
+        c.stats.int.set(18);
         // c.addAC(2 + 2);
-        c.spellAttackBonus = 2
+        c.spellAttackBonus = 2;
       });
 
       char.addFeature(
