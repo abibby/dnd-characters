@@ -173,6 +173,11 @@
         c.updateLimitedFeature("Divine Intervention Improvement");
       });
 
+      // char.levelUp("Druid", (c) => {
+      //   // Cleric 20 - Druid 1
+      //   c.updateLimitedFeature("Divine Intervention Improvement");
+      // });
+
       char.addItem("Shining Plate Armor", (c) => {
         c.setAC(18 + 1);
       });
@@ -274,6 +279,15 @@ are within the aura as well `
           range: "5",
         });
       });
+      char.addSpell("Shillelagh", (c) => {
+        c.addAttack({
+          name: "Shillelagh",
+          damage: () => "1d8 + 2d8 Radiant",
+          type: 'attack',
+          attackBonus: () => c.stats.wis.mod() + c.proficiencyBonus,
+          range: "5",
+        });
+      });
 
       // Level 1
       char.addSpell("Healing Word");
@@ -304,10 +318,10 @@ are within the aura as well `
       char.addSpell("Dawn");
       char.addSpell("Greater Restoration");
       char.addSpell("Holy Weapon");
-      // char.addSpell('Contagion')
+      char.addSpell("Summon Celestial")
 
       // Level 6
-      // char.addSpell('Harm')
+      char.addSpell('Harm')
       // char.addSpell('Planar Ally')
       // char.addSpell("True Seeing");
       char.addSpell("Word of Recall");
@@ -320,12 +334,31 @@ are within the aura as well `
       char.addSpell("Temple of the Gods");
 
       // level 8
-      // char.addSpell('Antimagic Field')
-      char.addSpell("Holy Aura");
+      char.addSpell('Antimagic Field')
+      // char.addSpell("Holy Aura");
       // char.addSpell('Control Weather')
 
       // level 9
       char.addSpell("Mass Heal");
+
+      // Druid
+      // cleric
+      char.addSpell("Shillelagh");
+      char.addSpell("Druidcraft");
+
+      // level 1
+      char.addSpell("Goodberry");
+
+      // level 3
+      char.addSpell("Summon Fey");
+
+      // level 4
+      // char.addSpell("Conjure Woodland Beings");
+      char.addSpell("Polymorph");
+
+      // level 6
+      char.addSpell("Transport via Plants");
+      char.addSpell("Wind Walk");
 
       char.assert(
         (c) =>
@@ -333,7 +366,11 @@ are within the aura as well `
           c.stats.wis.mod() +
           1 /* Telekinetic */ +
           5 /* cantrips */ +
-          10 /* cleric */,
+          10 /* cleric */ +
+          // Druid
+          c.level.get("Druid") +
+          c.stats.wis.mod() +
+          2 /* cantrips */,
         (c) => c.spells.length,
         "Number of spells"
       );
