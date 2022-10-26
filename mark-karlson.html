@@ -173,10 +173,10 @@
         c.updateLimitedFeature("Divine Intervention Improvement");
       });
 
-      // char.levelUp("Druid", (c) => {
-      //   // Cleric 20 - Druid 1
-      //   c.updateLimitedFeature("Divine Intervention Improvement");
-      // });
+      char.levelUp("Druid", (c) => {
+        // Cleric 20 - Druid 1
+        c.updateLimitedFeature("Divine Intervention Improvement");
+      });
 
       char.addItem("Shining Plate Armor", (c) => {
         c.setAC(18 + 1);
@@ -279,15 +279,6 @@ are within the aura as well `
           range: "5",
         });
       });
-      char.addSpell("Shillelagh", (c) => {
-        c.addAttack({
-          name: "Shillelagh",
-          damage: () => "1d8 + 2d8 Radiant",
-          type: 'attack',
-          attackBonus: () => c.stats.wis.mod() + c.proficiencyBonus,
-          range: "5",
-        });
-      });
 
       // Level 1
       char.addSpell("Healing Word");
@@ -342,15 +333,24 @@ are within the aura as well `
       char.addSpell("Mass Heal");
 
       // Druid
-      // cleric
-      char.addSpell("Shillelagh");
+      // Cantrip
       char.addSpell("Druidcraft");
+      char.addSpell("Shillelagh", (c) => {
+        c.addAttack({
+          name: "Shillelagh",
+          damage: () => "1d8 + 2d8 Radiant",
+          type: 'attack',
+          attackBonus: () => c.stats.wis.mod() + c.proficiencyBonus,
+          range: "5",
+        });
+      });
 
       // level 1
       char.addSpell("Goodberry");
 
       // level 3
-      char.addSpell("Summon Fey");
+      // char.addSpell("Summon Fey");
+      char.addSpell("Water Breathing");
 
       // level 4
       // char.addSpell("Conjure Woodland Beings");
@@ -359,6 +359,9 @@ are within the aura as well `
       // level 6
       char.addSpell("Transport via Plants");
       char.addSpell("Wind Walk");
+
+      // level 9
+      char.addSpell("Shapechange")
 
       char.assert(
         (c) =>
